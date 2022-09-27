@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 16px;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      .parent {
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: space-between;
+        color: white;
+      }
+
+      .parent > div {
+        background-color: blue;
+        flex-basis: 30%;
+        min-width: 220px;
+        border-radius: 5px;
+        box-shadow: 2px 12px 25px rgba(0, 0, 0, 0.5);
+        margin: 20px 0px;
+      }
+
+      h3 {
+        text-align: center;
+      }
+
+      div[data-maxct] {
+        font-size: 60px;
+        text-align: center;
+      }
+
+      p {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="container">
+        <h3>Facebook</h3>
+        <div data-maxct="28000">28000</div>
+        <p>Number of Facebook Users</p>
+      </div>
+
+      <div class="container">
+        <h3>Youtube</h3>
+        <div data-maxct="12000">12000</div>
+        <p>Number of Youtube Subscribers</p>
+      </div>
+
+      <div class="container">
+        <h3>Twitch</h3>
+        <div data-maxct="18000">18000</div>
+        <p>Number of Twitch Viewers</p>
+      </div>
+    </div>
+
+    <script>
+      let eles = document.querySelectorAll("div[data-maxct]");
+      let startval = Array.from(eles).map((item) => {
+        return Math.floor(Number(item.dataset.maxct) / 200);
+      });
+
+      let maxval = Array.from(eles).map((item) => {
+        return Number(item.dataset.maxct);
+      });
+
+      for (let i = 1; i <= 200; i++) {
+        setTimeout(function () {
+          eles[0].innerText = String(
+            Math.floor(startval[0] * i) <= maxval[0]
+              ? Math.floor(startval[0] * i)
+              : maxval[0]
+          );
+          eles[1].innerText = String(
+            Math.floor(startval[1] * i) <= maxval[1]
+              ? Math.floor(startval[1] * i)
+              : maxval[1]
+          );
+          eles[2].innerText = String(
+            Math.floor(startval[2] * i) <= maxval[2]
+              ? Math.floor(startval[2] * i)
+              : maxval[2]
+          );
+        }, i * 10);
+      }
+    </script>
+  </body>
+</html>
